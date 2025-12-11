@@ -64,23 +64,6 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 blur-3xl">
             <div className="h-64 w-64 rounded-full bg-purple-500/10" />
           </div>
-
-          {/* Orbital ring */}
-          <div className="relative flex h-64 w-64 items-center justify-center sm:h-80 sm:w-80">
-            <div className="orbit-ring absolute inset-0 rounded-full border border-purple-500/30" />
-
-            {/* Rotating globe */}
-            <div className="relative flex h-56 w-56 items-center justify-center rounded-full bg-slate-900/60 shadow-2xl shadow-purple-500/40 backdrop-blur">
-              <Image
-                src="/globe.svg"
-                alt="Memories orbiting your world"
-                width={260}
-                height={260}
-                className="rotate-slow drop-shadow-[0_0_35px_rgba(168,85,247,0.7)]"
-                priority
-              />
-            </div>
-          </div>
         </div>
       </section>
     </main>

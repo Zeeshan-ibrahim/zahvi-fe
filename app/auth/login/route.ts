@@ -11,9 +11,9 @@ export async function POST(req: Request) {
         }
 
         const backendRes = await fetch("http://localhost:3005/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
         });
     
         const data = await backendRes.json();
@@ -30,10 +30,10 @@ export async function POST(req: Request) {
         const res = NextResponse.json({ success: true });
     
         res.cookies.set("token", token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-        path: "/",
+            httpOnly: true,
+            secure: true,
+            sameSite: "strict",
+            path: "/",
         });
     
         return res;
@@ -44,8 +44,4 @@ export async function POST(req: Request) {
             { status: 503 }
         );
     }
-  }
-
-  export async function GET() {
-    return new Response("This route only supports POST requests", { status: 200 });
   }
