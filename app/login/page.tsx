@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import {useLogin, useSignup} from "@/dal/auth/auth.services"
 
 type Mode = "login" | "signup";
 
@@ -16,24 +15,35 @@ export default function AuthPage() {
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const postLogin = useLogin();
-  const postSignup = useSignup();
-
   const isLogin = mode === "login";
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isLogin) {
-      postLogin.mutate({ email, password });
+      try{
+        const res = await fetch("/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        });
+      }
+      catch(e){
+        console.log("error in handlesubmit", e)
+      }
     } else {
-      postSignup.mutate({ name, email, password });
+      // postSignup.mutate({ name, email, password });
     }
   };
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-between bg-gradient-to-b from-slate-950 via-slate-900 to-black px-4 py-10 text-white sm:px-10 lg:px-20">
       {/* Top navigation / CTA */}
-      <header className="flex w-full max-w-6xl items-center justify-between">
+      <header className="flex w-full items-center justify-between">
         <h1 className="text-lg font-semibold tracking-tight text-slate-100">
           ZaHvi
         </h1>
@@ -49,7 +59,6 @@ export default function AuthPage() {
 
       {/* Auth content */}
       <section className="mt-8 flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-12 lg:mt-16 lg:flex-row">
-        {/* Auth card */}
         <div className="w-full max-w-md rounded-3xl border border-white/10 bg-slate-950/70 p-6 shadow-2xl shadow-purple-500/30 backdrop-blur sm:p-8">
           <div className="mb-6 flex items-center justify-between">
             <div>
@@ -236,19 +245,23 @@ export default function AuthPage() {
             .
           </p>
         </div>
+      </section>
+    </main>
+  );
+}
 
-        {/* Rotating image / illustration */}
-        <div className="relative flex items-center justify-center">
-          {/* Soft glow behind globe */}
+  {/*  Rotating image / illustration
+<div className="relative flex items-center justify-center">
+        Soft glow behind globe
           <div className="pointer-events-none absolute inset-0 blur-3xl">
             <div className="h-64 w-64 rounded-full bg-purple-500/10" />
           </div>
 
-          {/* Orbital ring */}
+          {/* Orbital ring 
           <div className="relative flex h-64 w-64 items-center justify-center sm:h-80 sm:w-80">
             <div className="orbit-ring absolute inset-0 rounded-full border border-purple-500/30" />
 
-            {/* Rotating globe */}
+            {/* Rotating globe 
             <div className="relative flex h-56 w-56 items-center justify-center rounded-full bg-slate-900/60 shadow-2xl shadow-purple-500/40 backdrop-blur">
               <Image
                 src="/globe.svg"
@@ -260,8 +273,4 @@ export default function AuthPage() {
               />
             </div>
           </div>
-        </div>
-      </section>
-    </main>
-  );
-}
+        </div> */}
