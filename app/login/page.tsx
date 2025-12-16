@@ -37,6 +37,23 @@ export default function AuthPage() {
       }
     } else {
       // postSignup.mutate({ name, email, password });
+      try{
+        const res = await fetch("/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullname: name,
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+          }),
+        });
+      }
+      catch(e){
+        console.log("error in handlesubmit", e)
+      }
     }
   };
 
