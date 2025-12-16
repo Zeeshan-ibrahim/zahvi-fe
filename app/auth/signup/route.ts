@@ -4,8 +4,6 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
 
-        console.log("Signup request body:", body);
-
         if (!body.name || typeof body.name !== 'string' || body.name.trim() === '') {
             return NextResponse.json({ error: 'Fullname is required and cannot be empty.' }, { status: 400 });
         }
@@ -32,7 +30,7 @@ export async function POST(req: Request) {
         if (body.password.length < 6) {
             return NextResponse.json({ error: 'Password must be at least 6 characters long.' }, { status: 400 });
         }
-        console.log("reaching here or not")
+        
         const backendRes = await fetch("http://localhost:3005/auth/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
