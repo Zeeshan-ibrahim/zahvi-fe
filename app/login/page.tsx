@@ -36,7 +36,7 @@ export default function AuthPage() {
         console.log("error in handlesubmit", e)
       }
     } else {
-      // postSignup.mutate({ name, email, password });
+      console.log("in sign up")
       try{
         const res = await fetch("/auth/signup", {
           method: "POST",
@@ -44,7 +44,7 @@ export default function AuthPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fullname: name,
+            name: name,
             email: email,
             password: password,
             confirmPassword: confirmPassword,
@@ -220,7 +220,7 @@ export default function AuthPage() {
                 type="submit"
                 className="inline-flex h-10 w-full items-center justify-center rounded-full bg-purple-500 text-sm font-medium text-white shadow-lg shadow-purple-500/40 transition hover:scale-[1.02] hover:bg-purple-400 hover:shadow-purple-400/60"
               >
-                {isLogin ? "Continue" : "Create account"}
+                {isLogin ? "Continue" : "Create account here"}
               </Button>
             </div>
           </form>
