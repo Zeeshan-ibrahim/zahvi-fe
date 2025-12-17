@@ -1,15 +1,19 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AuthPageClient } from "./AuthPageClient";
+import { ImageContent } from "./ImageContent";
 import { ROUTES } from "../routes";
 
-export default async function LoginPage() {
+export default async function dashboard() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token");
 
-  if (token?.value) {
-    redirect(ROUTES.DASHBOARD);
+  if (!token?.value) {
+    redirect(ROUTES.LOGIN);
   }
 
-  return <AuthPageClient />;
+  return (
+    <ImageContent />
+  )
+  
+  
 }
