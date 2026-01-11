@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AuthPageClient } from "./AuthPageClient";
+import { AuthPageClient } from "./components/AuthPageClient";
 import { ROUTES } from "../routes";
 
 export default async function LoginPage() {
