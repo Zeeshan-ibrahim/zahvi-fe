@@ -37,6 +37,7 @@ export async function POST(req: Request) {
             body: JSON.stringify(body)
         });
 
+        console.log(backendRes)
         if (!backendRes.ok) {
             const errorMessage = `Network error: ${backendRes.statusText}`;
             return NextResponse.json({ error: errorMessage }, { status: 503 });

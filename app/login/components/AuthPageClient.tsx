@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { ROUTES } from "../routes";
+import { ROUTES } from "../../routes";
 
 
 type Mode = "login" | "signup";
@@ -36,7 +36,7 @@ export function AuthPageClient() {
       });
 
       if (!res.ok) {
-        console.error("Auth request failed", await res.json().catch(() => ({})));
+        console.error("Auth request failed");
         return;
       }
 
