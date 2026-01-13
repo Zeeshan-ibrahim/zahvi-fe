@@ -23,7 +23,7 @@ type ImageMeta = {
   aperture: number | null;
 };
 
-export const ImageContent = () => {
+export const SingleImageModal = () => {
   const [images, setImages] = useState<ImageMeta[]>([]);
 
   const readDimensions = (file: File) =>
@@ -92,19 +92,17 @@ export const ImageContent = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { "image/*": [] },
-    multiple: true,
+    multiple: false,
     onDrop: handleFiles,
   });
 
   return (
-    <div className="w-full max-w-3xl rounded-xl border border-white/10 bg-slate-900/60 p-6 text-white shadow-lg shadow-slate-950/40">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <h2 className="text-lg font-semibold">Upload images</h2>
+    <div className="w-full h-[75vh] rounded-xl border border-white/10 bg-slate-900/60 p-6 text-white shadow-lg shadow-slate-950/40">
+      <div className="flex flex-col items-start gap-2">
+          <h2 className="text-lg font-semibold">Upload image</h2>
           <p className="text-sm text-slate-400">
-            Drag and drop or pick multiple images to view their metadata.
+            Drag and drop or pick an image to view their metadata.
           </p>
-        </div>
       </div>
 
       <div
@@ -119,7 +117,7 @@ export const ImageContent = () => {
         <span className="text-sm font-medium">
           {isDragActive ? "Drop the files here..." : "Drop images here or click to browse"}
         </span>
-        <span className="text-xs text-slate-400">PNG, JPG, GIF, WebP … (multiple allowed)</span>
+        <span className="text-xs text-slate-400">PNG, JPG, GIF, WebP..</span>
       </div>
 
       {images.length > 0 ? (
@@ -201,7 +199,7 @@ export const ImageContent = () => {
         </div>
       ) : (
         <p className="mt-6 text-sm text-slate-400">
-          No images selected yet.
+          No image selected yet.
         </p>
       )}
     </div>
